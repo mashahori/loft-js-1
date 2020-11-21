@@ -10,8 +10,8 @@
    forEach([1, 2, 3], (el) => console.log(el))
  */
 function forEach(array, fn) {
-  for (const i of array) {
-    fn(i);
+  for (let i = 0; i < array.length; i++) {
+    fn(array[i], i, array);
   }
 }
 
@@ -26,8 +26,8 @@ function forEach(array, fn) {
  */
 function map(array, fn) {
   const newArray = [];
-  for (const i of array) {
-    newArray.push(fn(i));
+  for (let i = 0; i < array.length; i++) {
+    newArray.push(fn(array[i], i, array));
   }
   return newArray;
 }
@@ -45,11 +45,11 @@ function reduce(array, fn, initial) {
   let previousVal = initial || array[0];
   if (initial) {
     for (let i = 0; i < array.length; i++) {
-      previousVal = fn(previousVal, array[i]);
+      previousVal = fn(previousVal, array[i], i, array);
     }
   } else {
     for (let i = 1; i < array.length; i++) {
-      previousVal = fn(previousVal, array[i]);
+      previousVal = fn(previousVal, array[i], i, array);
     }
   }
   return previousVal;
