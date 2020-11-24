@@ -43,14 +43,8 @@ function map(array, fn) {
  */
 function reduce(array, fn, initial) {
   let previousVal = initial || array[0];
-  if (initial) {
-    for (let i = 0; i < array.length; i++) {
-      previousVal = fn(previousVal, array[i], i, array);
-    }
-  } else {
-    for (let i = 1; i < array.length; i++) {
-      previousVal = fn(previousVal, array[i], i, array);
-    }
+  for (let i = initial ? 0 : 1; i < array.length; i++) {
+    previousVal = fn(previousVal, array[i], i, array);
   }
   return previousVal;
 }
@@ -64,11 +58,7 @@ function reduce(array, fn, initial) {
    upperProps({ name: 'Сергей', lastName: 'Петров' }) вернет ['NAME', 'LASTNAME']
  */
 function upperProps(obj) {
-  const result = [];
-  for (const i in obj) {
-    result.push(i.toUpperCase());
-  }
-  return result;
+  return Object.keys(obj).map((el) => el.toUpperCase());
 }
 
 /*
