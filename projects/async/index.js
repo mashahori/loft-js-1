@@ -94,6 +94,7 @@ async function tryToLoad() {
   } catch (e) {
     loadingBlock.classList.add('hidden');
     loadingFailedBlock.classList.remove('hidden');
+    console.log(e);
   }
 }
 

@@ -1,7 +1,5 @@
 /* ДЗ 5 - Асинхронность и работа с сетью */
 
-//import { resolveConfig } from "prettier";
-
 /*
  Задание 1:
 
@@ -32,7 +30,7 @@ function delayPromise(seconds) {
 function loadAndSortTowns() {
   return fetch('https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json')
     .then((result) => result.json())
-    .then((towns) => towns.sort((a, b) => a.name.localCompare(b.name)));
+    .then((towns) => towns.sort((a, b) => a.name.localeCompare(b.name)));
 }
 
 export { delayPromise, loadAndSortTowns };
