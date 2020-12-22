@@ -52,7 +52,6 @@ const extractOldCookie = () => {
     .map((cookie) => cookie.match(/^([^=]+)=(.+)/))
     .reduce((obj, [, name, value]) => {
       obj.set(name, value);
-      console.log(obj);
       return obj;
     }, new Map());
 };
@@ -63,33 +62,27 @@ let filterValue = '';
 const addCookieToTable = (name, value) => {
   const row = document.createElement('tr');
   row.innerHTML = `
-    <tr>
-      <td>${name}</td>
-      <td>${value}</td>
-      <td><button type="button" id=${name}>удалить</button></td>
-    </tr>
+    <td>${name}</td>
+    <td>${value}</td>
+    <td><button type="button" id=${name}>удалить</button></td>
   `;
   listTable.appendChild(row);
 };
 
 addButton.addEventListener('click', () => {
-  // add cookie
   const name = addNameInput.value;
   const value = addValueInput.value;
   if (name && value) {
     document.cookie = `${name}=${value}`;
     cookieMap.set(name, value);
-    // addNameInput.value = '';
-    // addValueInput.value = '';
+    updateTable();
   }
 });
 
 listTable.addEventListener('click', (e) => {
-  // delete cookie
   const item = e.target.id;
   document.cookie = `${item}=deleted; max-age=0`;
   cookieMap.delete(item);
-  console.log(cookieMap);
   updateTable();
 });
 
